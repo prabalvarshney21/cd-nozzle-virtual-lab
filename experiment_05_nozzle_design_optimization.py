@@ -35,7 +35,6 @@ RUN:
 
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy.optimize import brentq
 import sys, os
 sys.path.insert(0, os.path.dirname(__file__))
 from nozzle_physics import (NozzleFlowSolver, mach_from_area_ratio,
