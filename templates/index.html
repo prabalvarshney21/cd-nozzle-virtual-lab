@@ -145,6 +145,25 @@ select option{background:#161B22}
   opacity:0;transition:opacity .3s;pointer-events:none}
 .toast-msg.show{opacity:1}
 hr.sep{border-color:var(--border);margin:.5rem 0}
+/* ── Experiment Info Banner ── */
+.exp-info{background:var(--surface);border:1px solid var(--border);border-radius:8px;
+  padding:.85rem 1rem;margin-bottom:.6rem}
+.exp-info-header{display:flex;align-items:center;gap:.6rem;margin-bottom:.5rem}
+.exp-num{background:var(--accent);color:#0D1117;border-radius:6px;
+  padding:.15rem .5rem;font-weight:800;font-size:.78rem;white-space:nowrap}
+.exp-title{color:var(--text);font-size:1rem;font-weight:700}
+.exp-objective{color:var(--muted);font-size:.8rem;line-height:1.55;margin-bottom:.55rem}
+.exp-objective strong{color:var(--accent);font-weight:600}
+.exp-concepts{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:.45rem}
+.exp-tag{background:rgba(88,166,255,.1);border:1px solid rgba(88,166,255,.2);
+  color:var(--accent);border-radius:12px;padding:.12rem .55rem;font-size:.7rem;font-weight:600}
+.exp-procedure{background:#0D1117;border:1px solid var(--border);border-radius:6px;
+  padding:.55rem .75rem;font-size:.76rem;color:var(--muted);line-height:1.55}
+.exp-procedure ol{margin:0;padding-left:1.2rem}
+.exp-procedure li{margin-bottom:.2rem}
+.exp-procedure li strong{color:var(--text)}
+.exp-toggle-info{background:none;border:none;color:var(--accent);font-size:.73rem;
+  cursor:pointer;padding:0;text-decoration:underline;margin-top:.3rem}
 </style>
 </head>
 <body>
@@ -174,6 +193,32 @@ hr.sep{border-color:var(--border);margin:.5rem 0}
 
 <!-- ══════════════════ EXP 1 ═══════════════════════════════════════════════ -->
 <div class="tab-pane fade show active" id="t1">
+<div class="exp-info">
+  <div class="exp-info-header">
+    <span class="exp-num">EXP 1</span>
+    <span class="exp-title">Mach Number Distribution in a Converging-Diverging Nozzle</span>
+  </div>
+  <div class="exp-objective">
+    <strong>Objective:</strong> Visualise how the Mach number varies along a C-D nozzle under four distinct back-pressure regimes — fully subsonic, normal shock inside the diverging section (near exit & mid-diverge), and the fully supersonic (design) condition. Understand the role of the area-Mach relation and how back pressure controls the flow regime.
+  </div>
+  <div class="exp-concepts">
+    <span class="exp-tag">Area–Mach Relation</span>
+    <span class="exp-tag">Isentropic Flow</span>
+    <span class="exp-tag">Back Pressure Regimes</span>
+    <span class="exp-tag">Sonic Throat (M=1)</span>
+    <span class="exp-tag">Normal Shock</span>
+  </div>
+  <div class="exp-procedure" id="proc1" style="display:none">
+    <ol>
+      <li><strong>Set stagnation conditions</strong> (P₀, T₀) and the exit area ratio A<sub>e</sub>/A*.</li>
+      <li><strong>Adjust back-pressure ratios</strong> for subsonic, shock-near-exit, and shock-mid-diverge cases.</li>
+      <li><strong>Run the simulation</strong> — observe Mach distribution plots for all four regimes.</li>
+      <li><strong>Compare</strong> the supersonic design case (auto-computed) against shock cases.</li>
+      <li><strong>Vary AR</strong> (2–5) and note how M_exit changes. Complete Lab Tasks below.</li>
+    </ol>
+  </div>
+  <button class="exp-toggle-info" onclick="toggleEl('proc1')">▸ Show/Hide Procedure</button>
+</div>
 <div class="row g-2">
 <div class="col-md-3">
   <div class="panel">
@@ -233,6 +278,32 @@ hr.sep{border-color:var(--border);margin:.5rem 0}
 
 <!-- ══════════════════ EXP 2 ═══════════════════════════════════════════════ -->
 <div class="tab-pane fade" id="t2">
+<div class="exp-info">
+  <div class="exp-info-header">
+    <span class="exp-num">EXP 2</span>
+    <span class="exp-title">Normal Shock in the Diverging Section</span>
+  </div>
+  <div class="exp-objective">
+    <strong>Objective:</strong> Study how a normal shock forms and moves within the diverging section of a C-D nozzle as back pressure varies. Analyse the Rankine–Hugoniot jump conditions — pressure, temperature, Mach number, and stagnation pressure loss across the shock. Verify entropy generation (Δs > 0) for every shock.
+  </div>
+  <div class="exp-concepts">
+    <span class="exp-tag">Rankine–Hugoniot Relations</span>
+    <span class="exp-tag">Normal Shock Jump</span>
+    <span class="exp-tag">Entropy Generation</span>
+    <span class="exp-tag">Stagnation Pressure Loss</span>
+    <span class="exp-tag">2nd Law of Thermodynamics</span>
+  </div>
+  <div class="exp-procedure" id="proc2" style="display:none">
+    <ol>
+      <li><strong>Set P₀, T₀, and AR</strong> — the design Mach number is auto-computed.</li>
+      <li><strong>Run simulation</strong> — five back-pressure cases are swept automatically (or specify custom P<sub>b</sub> values).</li>
+      <li><strong>Observe</strong> the shock location move toward the throat as P<sub>b</sub> increases.</li>
+      <li><strong>Read the shock jump table</strong> — M₁→M₂, P₂/P₁, T₂/T₁, P₀₂/P₀₁, Δs/R.</li>
+      <li><strong>Verify</strong> Rankine–Hugoniot manually for one case. Complete Lab Tasks.</li>
+    </ol>
+  </div>
+  <button class="exp-toggle-info" onclick="toggleEl('proc2')">▸ Show/Hide Procedure</button>
+</div>
 <div class="row g-2">
 <div class="col-md-3">
   <div class="panel">
@@ -281,6 +352,32 @@ hr.sep{border-color:var(--border);margin:.5rem 0}
 
 <!-- ══════════════════ EXP 3 ═══════════════════════════════════════════════ -->
 <div class="tab-pane fade" id="t3">
+<div class="exp-info">
+  <div class="exp-info-header">
+    <span class="exp-num">EXP 3</span>
+    <span class="exp-title">Throat Sonic Choking & Mass Flow Saturation</span>
+  </div>
+  <div class="exp-objective">
+    <strong>Objective:</strong> Demonstrate the phenomenon of aerodynamic choking — show that once the throat reaches M = 1, further reduction in back pressure cannot increase the mass flow rate. Understand why information cannot propagate upstream past a sonic throat (acoustic barrier). Derive and verify the choked mass flow equation.
+  </div>
+  <div class="exp-concepts">
+    <span class="exp-tag">Choked Flow</span>
+    <span class="exp-tag">Critical Pressure Ratio P*/P₀</span>
+    <span class="exp-tag">Mass Flow Rate ṁ</span>
+    <span class="exp-tag">Acoustic Barrier</span>
+    <span class="exp-tag">Sonic Conditions at Throat</span>
+  </div>
+  <div class="exp-procedure" id="proc3" style="display:none">
+    <ol>
+      <li><strong>Set P₀, T₀, throat area A*,</strong> and exit area ratio.</li>
+      <li><strong>Run simulation</strong> — a sweep of P<sub>b</sub>/P₀ from 0.05 to 1.0 is performed.</li>
+      <li><strong>Observe the ṁ vs P<sub>b</sub>/P₀ curve</strong> — note the flat plateau below P*/P₀ ≈ 0.528.</li>
+      <li><strong>Verify ṁ_max</strong> using the choked flow formula with your P₀, T₀, A* values.</li>
+      <li><strong>Explore</strong> how ṁ_max scales with P₀ (linear) and T₀ (inverse √). Complete Lab Tasks.</li>
+    </ol>
+  </div>
+  <button class="exp-toggle-info" onclick="toggleEl('proc3')">▸ Show/Hide Procedure</button>
+</div>
 <div class="row g-2">
 <div class="col-md-3">
   <div class="panel">
@@ -330,6 +427,32 @@ hr.sep{border-color:var(--border);margin:.5rem 0}
 
 <!-- ══════════════════ EXP 4 ═══════════════════════════════════════════════ -->
 <div class="tab-pane fade" id="t4">
+<div class="exp-info">
+  <div class="exp-info-header">
+    <span class="exp-num">EXP 4</span>
+    <span class="exp-title">Full Flow Field Visualisation (M, P, T, ρ, V)</span>
+  </div>
+  <div class="exp-objective">
+    <strong>Objective:</strong> Visualise all five thermodynamic and flow properties — Mach number, static pressure, static temperature, density, and velocity — as 2-D colour maps through the nozzle cross-section. Compare the fully-expanded design case against a normal-shock or subsonic case to see the dramatic differences in the flow field.
+  </div>
+  <div class="exp-concepts">
+    <span class="exp-tag">Isentropic Relations</span>
+    <span class="exp-tag">2-D Flow Visualisation</span>
+    <span class="exp-tag">Continuity Equation</span>
+    <span class="exp-tag">Thrust Calculation</span>
+    <span class="exp-tag">Property Gradients</span>
+  </div>
+  <div class="exp-procedure" id="proc4" style="display:none">
+    <ol>
+      <li><strong>Set P₀, T₀, AR, and A*</strong> for high-speed flow conditions.</li>
+      <li><strong>Choose a comparison case</strong> — shock mid-diverge, subsonic, or design-only.</li>
+      <li><strong>Run simulation</strong> — generates 2-D colour maps and 1-D profile plots.</li>
+      <li><strong>Analyse colour maps</strong> — identify throat gradients, expansion fans, shock discontinuity.</li>
+      <li><strong>Verify exit conditions</strong> manually using isentropic formulas. Complete Lab Tasks.</li>
+    </ol>
+  </div>
+  <button class="exp-toggle-info" onclick="toggleEl('proc4')">▸ Show/Hide Procedure</button>
+</div>
 <div class="row g-2">
 <div class="col-md-3">
   <div class="panel">
@@ -387,6 +510,32 @@ hr.sep{border-color:var(--border);margin:.5rem 0}
 
 <!-- ══════════════════ EXP 5 ═══════════════════════════════════════════════ -->
 <div class="tab-pane fade" id="t5">
+<div class="exp-info">
+  <div class="exp-info-header">
+    <span class="exp-num">EXP 5</span>
+    <span class="exp-title">Nozzle Design Optimisation & Thrust Performance</span>
+  </div>
+  <div class="exp-objective">
+    <strong>Objective:</strong> Determine the optimum exit area ratio that maximises thrust coefficient C<sub>f</sub> at different altitudes (sea level, cruise, stratosphere, space). Understand the trade-off between over-expanded and under-expanded nozzle operation. Compare real engine designs (SSME, Merlin 1D, Merlin Vacuum) and explain why different area ratios are used.
+  </div>
+  <div class="exp-concepts">
+    <span class="exp-tag">Thrust Coefficient C_f</span>
+    <span class="exp-tag">Specific Impulse I_sp</span>
+    <span class="exp-tag">Over/Under-Expansion</span>
+    <span class="exp-tag">Altitude Compensation</span>
+    <span class="exp-tag">Rocket Nozzle Design</span>
+  </div>
+  <div class="exp-procedure" id="proc5" style="display:none">
+    <ol>
+      <li><strong>Set combustion conditions</strong> (P₀, T₀) and throat area A*.</li>
+      <li><strong>Set ambient pressures</strong> for four altitudes.</li>
+      <li><strong>Run simulation</strong> — C<sub>f</sub> vs AR is plotted for each altitude.</li>
+      <li><strong>Read the summary table</strong> — optimal AR, M_exit, C<sub>f</sub>, thrust F, and I<sub>sp</sub> at each altitude.</li>
+      <li><strong>Look up real engines</strong> and compare their AR with your simulation. Complete Lab Tasks.</li>
+    </ol>
+  </div>
+  <button class="exp-toggle-info" onclick="toggleEl('proc5')">▸ Show/Hide Procedure</button>
+</div>
 <div class="row g-2">
 <div class="col-md-3">
   <div class="panel">
