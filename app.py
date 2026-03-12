@@ -12,9 +12,12 @@ if hasattr(sys.stderr, 'reconfigure'):
     sys.stderr.reconfigure(encoding='utf-8', errors='replace')
 
 # ── matplotlib MUST use non-interactive backend BEFORE any pyplot import ──────
-# Redirect font/config cache to /tmp for read-only serverless environments (Vercel)
+# Create a writable cache dir for Vercel's read-only filesystem
 import os
-os.environ.setdefault('MPLCONFIGDIR', '/tmp')
+_MPL_CACHE = '/tmp/mpl_cache'
+os.makedirs(_MPL_CACHE, exist_ok=True)
+os.environ['MPLCONFIGDIR'] = _MPL_CACHE
+os.environ['MPLBACKEND']   = 'Agg'
 
 import matplotlib
 matplotlib.use('Agg')
@@ -243,6 +246,21 @@ def _respond(n, plot_fn, plot_kwargs):
                         'full_error': tb})
 
 # ── Routes ────────────────────────────────────────────────────────────────────
+
+@app.route('/health')
+def health():
+    return jsonify({
+        'status': 'ok',
+        'cwd': os.getcwd(),
+        'base_dir': _BASE_DIR,
+        'templates_exist': os.path.exists(os.path.join(_BASE_DIR, 'templates', 'index.html')),
+        'mpl_cache': os.environ.get('MPLCONFIGDIR'),
+    })
+
+@app.errorhandler(Exception)
+def handle_exception(e):
+    tb = traceback.format_exc()
+    return jsonify({'error': str(e), 'traceback': tb}), 500
 
 @app.route('/')
 def index():
