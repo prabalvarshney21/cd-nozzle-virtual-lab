@@ -306,7 +306,7 @@ class NozzleFlowSolver:
         # Binary search for shock location
         lo, hi = float(ti + 1), float(self.n_pts - 2)
         try:
-            shock_idx = int(brentq(residual, lo, hi, xtol=1.0))
+            shock_idx = int(_brentq(residual, lo, hi, xtol=1.0))
         except ValueError:
             shock_idx = self.n_pts - 2
 
